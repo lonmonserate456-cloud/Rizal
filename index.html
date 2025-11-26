@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. José Rizal - Noli Me Tangere</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-brown: #5C4033;
+            --secondary-brown: #8B7355;
+            --light-cream: #F5E6D3;
+            --dark-brown: #3E2723;
+            --accent-gold: #D4AF37;
+            --text-dark: #2C1810;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, var(--light-cream) 0%, #E8D5C4 100%);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: linear-gradient(to right, var(--dark-brown), var(--primary-brown));
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light-cream);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--accent-gold);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(60, 39, 35, 0.85), rgba(60, 39, 35, 0.85)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%235C4033" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 2rem;
+            text-align: center;
+            color: var(--light-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 2rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: left;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 5rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--secondary-brown);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--secondary-brown);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(92, 64, 51, 0.2);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(92, 64, 51, 0.3);
+            border-color: var(--accent-gold);
+        }
+
+        .card h3 {
+            color: var(--primary-brown);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3::before {
+            content: '✦';
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Chapter 8 Highlight */
+        .chapter-highlight {
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
+            color: var(--light-cream);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 3rem 0;
+        }
+
+        .chapter-highlight h2 {
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .chapter-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-start;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 45%;
+            border: 2px solid var(--secondary-brown);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(92, 64, 51, 0.3);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-gold);
+            border: 4px solid var(--dark-brown);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -60px;
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent-gold);
+            color: var(--dark-brown);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-gold);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-brown);
+            color: var(--light-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-gold);
+            color: var(--dark-brown);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .quote {
+                font-size: 1.1rem;
+                padding-left: 1rem;
+            }
+
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--dark-brown);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -60px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--light-cream);
+            border-radius: 50%;
+            border-top-color: var(--accent-gold);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Decorative elements */
+        .decorative-line {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 2rem 0;
+        }
+
+        .highlight-text {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▸';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <nav>
+            <div class="logo">Dr. José Rizal</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="smoothScroll('home')">Home</a></li>
+                <li><a href="#about" onclick="smoothScroll('about')">About Rizal</a></li>
+                <li><a href="#noli" onclick="smoothScroll('noli')">Noli Me Tangere</a></li>
+                <li><a href="#chapter8" onclick="smoothScroll('chapter8')">Chapter 8</a></li>
+                <li><a href="#timeline" onclick="smoothScroll('timeline')">Timeline</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Dr. José Protacio Rizal</h1>
+            <p class="subtitle">Pambansang Bayani ng Pilipinas</p>
+            <div class="decorative-line"></div>
+            <p class="quote">
+                "Ang hindi magmahal sa kanyang salita mahigit sa hayop at malansang isda."
+            </p>
+            <div class="decorative-line"></div>
+            <p style="font-size: 1.2rem; margin-top: 2rem;">
+                Tuklasin ang buhay at mga akda ng ating pambansang bayani
+            </p>
+        </div>
+    </section>
+
+    <!-- About Rizal Section -->
+    <div class="container">
+        <section id="about" class="fade-in">
+            <h2 class="section-title">Sino si Dr. José Rizal?</h2>
+            <p class="section-subtitle">Ang Dakilang Manunulat at Bayani</p>
+            
+            <div class="card">
+                <h3>Maikling Talambuhay</h3>
+                <p>Si Dr. José Protacio Rizal Mercado y Alonso Realonda ay ipinanganak noong <span class="highlight-text">Hunyo 19, 1861</span> sa Calamba, Laguna. Siya ay isang polymath - isang physician, ophthalmologist, poet, novelist, historian, painter, sculptor, educator, linguist, at higit sa lahat, isang dakilang patriot.</p>
+                <div class="decorative-line"></div>
+                <p>Kinilala siya bilang <span class="highlight-text">Pambansang Bayani ng Pilipinas</span> dahil sa kanyang mapayapang pakikibaka para sa kalayaan ng bayan mula sa kamay ng mga Español. Siya ay binaril sa Bagumbayan (ngayon ay Luneta/Rizal Park) noong <span class="highlight-text">Disyembre 30, 1896</span>.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Edukasyon</h3>
+                    <ul>
+                        <li>Ateneo Municipal de Manila (Bachelor of Arts, 1877)</li>
+                        <li>University of Santo Tomas (Medicine, 1877-1882)</li>
+                        <li>Universidad Central de Madrid (Licentiate in Medicine, 1884)</li>
+                        <li>University of Heidelberg (Ophthalmology)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Mga Talento</h3>
+                    <ul>
+                        <li>Marunong sa 22+ wika</li>
+                        <li>Dalubhasa sa agham at sining</li>
+                        <li>Mahusay na manunulat at makata</li>
+                        <li>Bihasang pintor at eskultor</li>
+                        <li>Eksperto sa ophthalmology</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Noli Me Tangere Section -->
+        <section id="noli" class="fade-in">
+            <h2 class="section-title">Noli Me Tangere</h2>
+            <p class="section-subtitle">"Huwag Mo Akong Salingin"</p>
+
+            <div class="card">
+                <h3>Tungkol sa Nobela</h3>
+                <p><span class="highlight-text">Noli Me Tangere</span> ay ang unang nobelang isinulat ni Dr. José Rizal. Inilathala ito noong <span class="highlight-text">1887 sa Berlin, Germany</span>. Ang nobela ay isang mahalagang bahagi ng panitikang Pilipino na naglalahad ng mga kalupitan at pang-aabuso ng mga Español at ng simbahang Katoliko sa Pilipinas noong panahon ng kolonyal.</p>
+                
+                <div class="decorative-line"></div>
+                
+                <p>Ang pamagat na "Noli Me Tangere" ay mula sa Latin na nangangahulugang <span class="highlight-text">"Touch Me Not"</span> o "Huwag Mo Akong Salingin". Ito ay tumutukoy sa mga salitang sinabi ni Hesus kay Maria Magdalena pagkatapos ng kanyang pagkabuhay.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Mga Pangunahing Tauhan</h3>
+                    <ul>
+                        <li><strong>Crisostomo Ibarra</strong> - Binata na bumalik mula sa Europa</li>
+                        <li><strong>Maria Clara</strong> - Kasintahan ni Ibarra</li>
+                        <li><strong>Padre Damaso</strong> - Mapang-abusong pari</li>
+                        <li><strong>Elias</strong> - Taong tulad ni Cristo, kaibigan ni Ibarra</li>
+                        <li><strong>Sisa</strong> - Inang nawala ang katinuan</li>
+                        <li><strong>Pilosopo Tasyo</strong> - Matalinong ermitanyo</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Mga Tema</h3>
+                    <ul>
+                        <li>Kolonyalismo at pang-aapi</li>
+                        <li>Korupsyon sa gobyerno at simbahan</li>
+                        <li>Kahirapan at kawalan ng katarungan</li>
+                        <li>Edukasyon bilang susi sa kalayaan</li>
+                        <li>Pag-ibig at sakripisyo</li>
+                        <li>Pagkakakilanlan ng mga Pilipino</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 8 Highlight -->
+        <section id="chapter8" class="chapter-highlight fade-in">
+            <h2>Kabanata 8: Mga Alaala (Memories)</h2>
+            
+            <div class="chapter-content">
+                <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">📖 Buod ng Kabanata</h3>
+                <p>Sa kabanatang ito, naaalala ni Crisostomo Ibarra ang kanyang nakaraan kasama ang kanyang ama at ang kanyang kasintahang si Maria Clara. Bumalik siya sa Pilipinas mula sa pitong taong pag-aaral sa Europa upang dalawin ang puntod ng kanyang yumaong ama.</p>
+                
+                <div class="decorative-line"></div>
+                
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">🔑 Mahahalagang Pangyayari</h3>
+                <ul style="color: var(--light-cream);">
+                    <li>Bumisita si Ibarra sa sementeryo upang hanapin ang libingan ng kanyang ama</li>
+                    <li>Nalaman niyang inilipat ang labi ng kanyang ama sa libingan ng mga Intsik dahil sa utos ni Padre Damaso</li>
+                    <li>Ang labi ay inilipat muli sa libingan ng mga Pilipino ngunit nilunod ng malakas na ulan</li>
+                    <li>Nakaramdam ng matinding lungkot at galit si Ibarra sa nalaman</li>
+                    <li>Ipinakita ang kawalan ng respeto ng mga pari sa mga patay at sa mga pamilya ng mga Pilipino</li>
+                </ul>
+
+                <div class="decorative-line"></div>
+
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">👥 Mga Tauhan sa Kabanatang Ito</h3>
+                <ul style="color: var(--light-cream);">
+                    <li><strong>Crisostomo Ibarra</strong> - Pangunahing tauhan na naghahanap ng libingan ng ama</li>
+                    <li><strong>Fosero (Gravedigger)</strong> - Nagsabi ng katotohanan tungkol sa nangyari sa labi</li>
+                    <li><strong>Don Rafael Ibarra</strong> - Yumaong ama ni Crisostomo (binanggit lamang)</li>
+                    <li><strong>Padre Damaso</strong> - Paring nag-utos na ilipat ang labi (binanggit)</li>
+                </ul>
+
+                <div class="decorative-line"></div>
+
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">💡 Mga Aral at Mensahe</h3>
+                <ul style="color: var(--light-cream);">
+                    <li><strong>Ang Abuso ng Kapangyarihan</strong> - Ipinakita kung paano ginamit ng mga pari ang kanilang impluwensya para sa personal na paghihiganti</li>
+                    <li><strong>Kawalan ng Katarungan</strong> - Kahit sa kamatayan, walang katarungan para sa mga Pilipino</li>
+                    <li><strong>Kahalagahan ng Dignidad</strong> - Dapat respetuhin ang mga patay at ang kanilang mga pamilya</li>
+                    <li><strong>Paglaban sa Kasamaan</strong> - Ang simula ng paggising ni Ibarra sa katotohanan ng lipunan</li>
+                </ul>
+
+                <div class="decorative-line"></div>
+
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">📌 Kahalagahan sa Buong Nobela</h3>
+                <p>Ang Kabanata 8 ay napakahalaga sapagkat ito ang <span class="highlight-text">simula ng tunggalian</span> sa pagitan ni Ibarra at ni Padre Damaso. Ang paghahanap ni Ibarra sa libingan ng kanyang ama ay simbolo ng kanyang paghahanap sa katarungan at katotohanan. Ito rin ang nagpasimula sa kanyang paggising sa realidad ng pang-aabuso ng mga Español sa Pilipinas.</p>
+                
+                <p style="margin-top: 1rem;">Ang kabanatang ito ay <span class="highlight-text">nakakaantig ng damdamin</span> at nagpapakita ng malalim na pagmamahal ni Ibarra sa kanyang ama, pati na rin ang kanyang determinasyon na labanan ang injustice sa kanilang lipunan.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#timeline" class="btn">Tingnan ang Timeline ng Buhay ni Rizal</a>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="fade-in">
+            <h2 class="section-title">Timeline ng Buhay ni Rizal</h2>
+            <p class="section-subtitle">Mga Mahahalagang Pangyayari</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1861</div>
+                        <h3>Kapanganakan</h3>
+                        <p>Ipinanganak si José Rizal sa Calamba, Laguna noong Hunyo 19, 1861</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1872</div>
+                        <h3>Ateneo de Manila</h3>
+                        <p>Nag-aral sa Ateneo Municipal at naging pinakamahusay na estudyante</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1877-1882</div>
+                        <h3>University of Santo Tomas</h3>
+                        <p>Nag-aral ng medisina at nakaranas ng diskriminasyon</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1882</div>
+                        <h3>Paglalakbay sa Europa</h3>
+                        <p>Umalis patungong Spain upang ipagpatuloy ang pag-aaral</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1887</div>
+                        <h3>Noli Me Tangere</h3>
+                        <p>Inilathala ang Noli Me Tangere sa Berlin, Germany</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1891</div>
+                        <h3>El Filibusterismo</h3>
+                        <p>Inilathala ang ikalawang nobela sa Ghent, Belgium</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1892</div>
+                        <h3>La Liga Filipina</h3>
+                        <p>Itinatag ang La Liga Filipina at dinaluhan sa Dapitan</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1896</div>
+                        <h3>Kamatayan</h3>
+                        <p>Binaril sa Bagumbayan noong Disyembre 30, 1896</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Cards -->
+        <section class="fade-in">
+            <h2 class="section-title">Mga Kontribusyon ni Rizal</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Sa Panitikan</h3>
+                    <p>Sumulat ng mga nobelang Noli Me Tangere at El Filibusterismo na nagpukaw sa diwa ng nasyonalismo. Ang kanyang mga tula ay puno ng pagmamahal sa bayan.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Sa Medisina</h3>
+                    <p>Naging dalubhasa sa ophthalmology at gumamot sa kanyang inang bulag. Nag-ambag sa pag-unlad ng agham sa Pilipinas.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Sa Edukasyon</h3>
+                    <p>Nagturo sa Dapitan at nagtayo ng paaralan. Naniniwala siya na ang edukasyon ang susi sa kalayaan ng bayan.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dr. José Rizal Tribute Website</p>
+        <p>Ginawa para sa pag-aaral at pagpapahalaga sa ating Pambansang Bayani</p>
+        <p style="margin-top: 1rem; font-style: italic;">"Ang kabataan ang pag-asa ng bayan"</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ↑
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Smooth Scroll
+        function smoothScroll(target) {
+            const element = document.getElementById(target);
+            const navMenu = document.getElementById('navMenu');
+            
+            // Close mobile menu if open
+            navMenu.classList.remove('active');
+            
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Show/Hide Scroll to Top Button
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Scroll to Top Function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Intersection Observer for Fade In Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Add smooth scroll to all nav links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    smoothScroll(targetId);
+                });
+            });
+        });
+
+        // Card hover effect enhancement
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Timeline animation on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-50px)';
+            item.style.transition = 'all 0.6s ease-out';
+            timelineObserver.observe(item);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            const scrollPosition = window.pageYOffset;
+            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>
