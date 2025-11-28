@@ -257,6 +257,21 @@
             margin-top: 2rem;
         }
 
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 115, 85, 0.1));
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
         /* Chapter 8 Highlight */
         .chapter-highlight {
             background: linear-gradient(135deg, var(--primary-brown), var(--secondary-brown));
@@ -282,7 +297,7 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Timeline */
+        /* Timeline with Images */
         .timeline {
             position: relative;
             padding: 2rem 0;
@@ -295,13 +310,13 @@
             transform: translateX(-50%);
             width: 4px;
             height: 100%;
-            background: var(--accent-gold);
+            background: linear-gradient(to bottom, var(--accent-gold), var(--secondary-brown));
         }
 
         .timeline-item {
             display: flex;
             justify-content: flex-start;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             position: relative;
         }
 
@@ -311,44 +326,108 @@
 
         .timeline-content {
             background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
+            padding: 2rem;
+            border-radius: 12px;
             width: 45%;
             border: 2px solid var(--secondary-brown);
             position: relative;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .timeline-content:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(92, 64, 51, 0.3);
+            box-shadow: 0 8px 25px rgba(92, 64, 51, 0.3);
         }
 
         .timeline-content::before {
             content: '';
             position: absolute;
             top: 50%;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             background: var(--accent-gold);
-            border: 4px solid var(--dark-brown);
+            border: 5px solid var(--dark-brown);
             border-radius: 50%;
             transform: translateY(-50%);
+            box-shadow: 0 0 0 4px var(--light-cream);
         }
 
         .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -60px;
+            right: -65px;
         }
 
         .timeline-item:nth-child(even) .timeline-content::before {
-            left: -60px;
+            left: -65px;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-brown), var(--primary-brown));
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--accent-gold);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.1) 10px,
+                rgba(0,0,0,0.1) 20px
+            );
         }
 
         .timeline-year {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
+            display: inline-block;
+            background: var(--dark-brown);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* Expandable Content */
+        .expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .expandable.active {
+            max-height: 1000px;
+        }
+
+        .expand-btn {
+            background: var(--accent-gold);
+            color: var(--dark-brown);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .expand-btn:hover {
+            background: var(--dark-brown);
+            color: var(--accent-gold);
+            transform: scale(1.05);
         }
 
         /* Button */
@@ -442,6 +521,72 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
 
+        /* Decorative elements */
+        .decorative-line {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 2rem 0;
+        }
+
+        .highlight-text {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▸';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--secondary-brown);
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 20px rgba(92, 64, 51, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--primary-brown);
+            font-size: 1.1rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -496,57 +641,16 @@
             }
 
             .timeline-item:nth-child(even) .timeline-content::before {
-                left: -60px;
+                left: -65px;
             }
 
             .grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--light-cream);
-            border-radius: 50%;
-            border-top-color: var(--accent-gold);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Decorative elements */
-        .decorative-line {
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
-            margin: 2rem 0;
-        }
-
-        .highlight-text {
-            color: var(--accent-gold);
-            font-weight: bold;
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        ul li::before {
-            content: '▸';
-            color: var(--accent-gold);
-            position: absolute;
-            left: 0;
+            .timeline-image {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -566,6 +670,7 @@
                 <li><a href="#noli" onclick="smoothScroll('noli')">Noli Me Tangere</a></li>
                 <li><a href="#chapter8" onclick="smoothScroll('chapter8')">Chapter 8</a></li>
                 <li><a href="#timeline" onclick="smoothScroll('timeline')">Timeline</a></li>
+                <li><a href="#legacy" onclick="smoothScroll('legacy')">Legacy</a></li>
             </ul>
         </nav>
     </header>
@@ -592,33 +697,94 @@
             <h2 class="section-title">Sino si Dr. José Rizal?</h2>
             <p class="section-subtitle">Ang Dakilang Manunulat at Bayani</p>
             
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">22+</span>
+                    <span class="stat-label">Mga Wika</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">35</span>
+                    <span class="stat-label">Taong Gulang</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Nobela</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Tula</span>
+                </div>
+            </div>
+
             <div class="card">
                 <h3>Maikling Talambuhay</h3>
                 <p>Si Dr. José Protacio Rizal Mercado y Alonso Realonda ay ipinanganak noong <span class="highlight-text">Hunyo 19, 1861</span> sa Calamba, Laguna. Siya ay isang polymath - isang physician, ophthalmologist, poet, novelist, historian, painter, sculptor, educator, linguist, at higit sa lahat, isang dakilang patriot.</p>
+                
+                <div class="info-box">
+                    <h4>💡 Nakakaaliw na Katotohanan:</h4>
+                    <p>Si Rizal ay nakapagsalita ng 22 wika kabilang ang Tagalog, Spanish, English, French, German, Latin, Greek, Arabic, Sanskrit, Hebrew, Chinese, Japanese, at marami pang iba!</p>
+                </div>
+
                 <div class="decorative-line"></div>
-                <p>Kinilala siya bilang <span class="highlight-text">Pambansang Bayani ng Pilipinas</span> dahil sa kanyang mapayapang pakikibaka para sa kalayaan ng bayan mula sa kamay ng mga Español. Siya ay binaril sa Bagumbayan (ngayon ay Luneta/Rizal Park) noong <span class="highlight-text">Disyembre 30, 1896</span>.</p>
+                <p>Kinilala siya bilang <span class="highlight-text">Pambansang Bayani ng Pilipinas</span> dahil sa kanyang mapayapang pakikibaka para sa kalayaan ng bayan mula sa kamay ng mga Español. Hindi tulad ng iba pang rebolusyonaryo, naniniwala si Rizal na ang edukasyon at reporma ang susi sa tunay na kalayaan.</p>
+                
+                <div class="info-box">
+                    <h4>📖 Huling Salita:</h4>
+                    <p>"Consummatum est!" (Natapos na!) - ang huling salitang sinabi ni Rizal bago siya binaril sa Bagumbayan noong <span class="highlight-text">Disyembre 30, 1896</span>.</p>
+                </div>
             </div>
 
             <div class="grid">
                 <div class="card">
-                    <h3>Edukasyon</h3>
+                    <h3>Edukasyon at Pagsasanay</h3>
                     <ul>
-                        <li>Ateneo Municipal de Manila (Bachelor of Arts, 1877)</li>
-                        <li>University of Santo Tomas (Medicine, 1877-1882)</li>
-                        <li>Universidad Central de Madrid (Licentiate in Medicine, 1884)</li>
-                        <li>University of Heidelberg (Ophthalmology)</li>
+                        <li><strong>Ateneo Municipal de Manila</strong> (1872-1877) - Bachelor of Arts with highest honors</li>
+                        <li><strong>University of Santo Tomas</strong> (1877-1882) - Philosophy and Medicine</li>
+                        <li><strong>Universidad Central de Madrid</strong> (1884) - Licentiate in Medicine</li>
+                        <li><strong>University of Paris</strong> - Advanced studies</li>
+                        <li><strong>University of Heidelberg</strong> (1886) - Specialization in Ophthalmology</li>
                     </ul>
+                    <button class="expand-btn" onclick="toggleExpand('education-more')">Magbasa Pa ▼</button>
+                    <div id="education-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <p>Noong bata pa si Rizal, ang kanyang ina ang kanyang unang guro. Sa edad na 3, nagsimula na siyang sumali sa mga panalangin ng pamilya. Sa edad na 5, natutong magbasa ng Spanish family Bible at nagsulat ng mga tula.</p>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <h3>Mga Talento</h3>
+                    <h3>Mga Talento at Kakayahan</h3>
                     <ul>
-                        <li>Marunong sa 22+ wika</li>
-                        <li>Dalubhasa sa agham at sining</li>
-                        <li>Mahusay na manunulat at makata</li>
-                        <li>Bihasang pintor at eskultor</li>
-                        <li>Eksperto sa ophthalmology</li>
+                        <li><strong>Linguist</strong> - 22+ wika</li>
+                        <li><strong>Manunulat</strong> - Nobelista, Makata, Essayist</li>
+                        <li><strong>Doktor</strong> - Ophthalmologist, ginamot ang kanyang inang bulag</li>
+                        <li><strong>Artista</strong> - Pintor, Eskultor, Dibuhista</li>
+                        <li><strong>Siyentipiko</strong> - Nakahanap ng bagong species ng hayop</li>
+                        <li><strong>Inhinyero</strong> - Gumawa ng water system sa Dapitan</li>
                     </ul>
+                    <button class="expand-btn" onclick="toggleExpand('talents-more')">Magbasa Pa ▼</button>
+                    <div id="talents-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <p>Nakahanap si Rizal ng tatlong bagong species: <em>Draco rizali</em> (isang lizard), <em>Apogonia rizali</em> (isang beetle), at <em>Rhacophorus rizali</em> (isang palaka). Ang mga ito ay pinangalanan sa kanya bilang parangal sa kanyang kontribusyon sa science.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Mga Paglalakbay</h3>
+                    <ul>
+                        <li><strong>Espanya</strong> - Madrid, Barcelona</li>
+                        <li><strong>Alemanya</strong> - Berlin, Heidelberg, Leipzig</li>
+                        <li><strong>Pransya</strong> - Paris, Marseilles</li>
+                        <li><strong>Belgium</strong> - Brussels, Ghent</li>
+                        <li><strong>Austria</strong> - Vienna</li>
+                        <li><strong>Italy</strong> - Rome, Venice, Milan</li>
+                        <li><strong>Hong Kong, Japan, USA</strong></li>
+                    </ul>
+                    <button class="expand-btn" onclick="toggleExpand('travels-more')">Magbasa Pa ▼</button>
+                    <div id="travels-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <p>Naglakbay si Rizal sa buong mundo mula 1882-1887 at 1888-1892. Sa kanyang mga paglalakbay, nag-aral siya ng iba't ibang kultura, wika, at sistema ng pamahalaan upang mahikayat ang mga reporma sa Pilipinas.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -630,36 +796,88 @@
 
             <div class="card">
                 <h3>Tungkol sa Nobela</h3>
-                <p><span class="highlight-text">Noli Me Tangere</span> ay ang unang nobelang isinulat ni Dr. José Rizal. Inilathala ito noong <span class="highlight-text">1887 sa Berlin, Germany</span>. Ang nobela ay isang mahalagang bahagi ng panitikang Pilipino na naglalahad ng mga kalupitan at pang-aabuso ng mga Español at ng simbahang Katoliko sa Pilipinas noong panahon ng kolonyal.</p>
+                <p><span class="highlight-text">Noli Me Tangere</span> (Touch Me Not) ay ang unang nobelang isinulat ni Dr. José Rizal. Inilathala ito noong <span class="highlight-text">Marso 1887 sa Berlin, Germany</span> sa tulong ng kanyang kaibigan na si Maximo Viola na nagbigay ng pondo para sa printing.</p>
+                
+                <div class="info-box">
+                    <h4>📚 Mga Katotohanan tungkol sa Noli:</h4>
+                    <ul>
+                        <li>Sinimulan ang pagsulat noong 1884 sa Madrid</li>
+                        <li>Tinapos sa Berlin noong 1887</li>
+                        <li>May 64 kabanata</li>
+                        <li>Ipinagbawal ng mga pari noong panahon ng Español</li>
+                        <li>Naging dahilan ng pagdakip kay Rizal</li>
+                    </ul>
+                </div>
                 
                 <div class="decorative-line"></div>
                 
-                <p>Ang pamagat na "Noli Me Tangere" ay mula sa Latin na nangangahulugang <span class="highlight-text">"Touch Me Not"</span> o "Huwag Mo Akong Salingin". Ito ay tumutukoy sa mga salitang sinabi ni Hesus kay Maria Magdalena pagkatapos ng kanyang pagkabuhay.</p>
+                <p>Ang pamagat na "Noli Me Tangere" ay mula sa Latin na nangangahulugang <span class="highlight-text">"Touch Me Not"</span> o "Huwag Mo Akong Salingin". Ito ay tumutukoy sa mga salitang sinabi ni Hesus kay Maria Magdalena pagkatapos ng kanyang pagkabuhay mula sa mga patay (Juan 20:17).</p>
+
+                <div class="info-box">
+                    <h4>🎯 Layunin ng Nobela:</h4>
+                    <p>Ipakilala sa mundo ang kalagayan ng Pilipinas sa ilalim ng pamamahala ng mga Español at ipakita ang pangangailangan para sa reporma at katarungan.</p>
+                </div>
             </div>
 
             <div class="grid">
                 <div class="card">
                     <h3>Mga Pangunahing Tauhan</h3>
                     <ul>
-                        <li><strong>Crisostomo Ibarra</strong> - Binata na bumalik mula sa Europa</li>
-                        <li><strong>Maria Clara</strong> - Kasintahan ni Ibarra</li>
-                        <li><strong>Padre Damaso</strong> - Mapang-abusong pari</li>
-                        <li><strong>Elias</strong> - Taong tulad ni Cristo, kaibigan ni Ibarra</li>
-                        <li><strong>Sisa</strong> - Inang nawala ang katinuan</li>
-                        <li><strong>Pilosopo Tasyo</strong> - Matalinong ermitanyo</li>
+                        <li><strong>Crisostomo Ibarra</strong> - Idealista, bumalik mula sa Europa, protagonist</li>
+                        <li><strong>Maria Clara</strong> - Magandang dalaga, kasintahan ni Ibarra</li>
+                        <li><strong>Padre Damaso</strong> - Mapang-abusong prayle, antagonist</li>
+                        <li><strong>Elias</strong> - Tulad ni Cristo, kaibigan at tagapagligtas ni Ibarra</li>
+                        <li><strong>Sisa</strong> - Inang nakalugmok sa kahibangan</li>
+                        <li><strong>Basilio at Crispin</strong> - Anak ni Sisa, mga sakristan</li>
+                        <li><strong>Pilosopo Tasyo</strong> - Matalinong ermitanyo, kumakatawan kay Paciano</li>
+                        <li><strong>Kapitan Tiyago</strong> - Mayamang negosyante, ama ni Maria Clara</li>
                     </ul>
+                    <button class="expand-btn" onclick="toggleExpand('characters-more')">Iba Pang Tauhan ▼</button>
+                    <div id="characters-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <ul>
+                            <li><strong>Padre Salvi</strong> - Mapagkunwaring pari</li>
+                            <li><strong>Donya Victorina</strong> - Mapagkunwariang Española</li>
+                            <li><strong>Don Tiburcio</strong> - Pekeng doktor, asawa ni Donya Victorina</li>
+                            <li><strong>Kapitan Heneral</strong> - Pinuno ng Pilipinas</li>
+                            <li><strong>Tiya Isabel</strong> - Tiya ni Maria Clara</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <h3>Mga Tema</h3>
+                    <h3>Mga Pangunahing Tema</h3>
                     <ul>
-                        <li>Kolonyalismo at pang-aapi</li>
-                        <li>Korupsyon sa gobyerno at simbahan</li>
-                        <li>Kahirapan at kawalan ng katarungan</li>
-                        <li>Edukasyon bilang susi sa kalayaan</li>
-                        <li>Pag-ibig at sakripisyo</li>
-                        <li>Pagkakakilanlan ng mga Pilipino</li>
+                        <li><strong>Kolonyalismo</strong> - Pang-aapi ng mga Español</li>
+                        <li><strong>Relihiyon</strong> - Abuso ng simbahan at mga pari</li>
+                        <li><strong>Korupsyon</strong> - Sa gobyerno at lipunan</li>
+                        <li><strong>Edukasyon</strong> - Susi sa kalayaan</li>
+                        <li><strong>Katarungan</strong> - Kakulangan nito sa lipunan</li>
+                        <li><strong>Pag-ibig</strong> - Ng bayan, pamilya, at romantiko</li>
+                        <li><strong>Sakripisyo</strong> - Para sa ikabubuti ng nakararami</li>
                     </ul>
+                    <button class="expand-btn" onclick="toggleExpand('themes-more')">Detalyadong Paliwanag ▼</button>
+                    <div id="themes-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <p><strong>Simbolismo:</strong> Ang bawat tauhan ay sumasalamin sa iba't ibang aspeto ng lipunang Pilipino noong panahon ng Español. Si Ibarra ay kumakatawan sa edukadong clase, si Elias sa mga inaapi, at si Sisa sa mga nawalan ng pag-asa.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Kahalagahan at Impluwensya</h3>
+                    <ul>
+                        <li>Nag-udyok ng damdaming nasyonalista</li>
+                        <li>Nag-bukas ng mata ng mga Pilipino</li>
+                        <li>Nagtulak ng reporma at rebolusyon</li>
+                        <li>Isa sa pinakamahalagang akda sa Pilipinas</li>
+                        <li>Required reading sa mga paaralan</li>
+                        <li>Naging batayan ng mga pelikula at dulaan</li>
+                    </ul>
+                    <button class="expand-btn" onclick="toggleExpand('impact-more')">Higit Pang Impormasyon ▼</button>
+                    <div id="impact-more" class="expandable">
+                        <div class="decorative-line"></div>
+                        <p>Ang Noli Me Tangere ay naging sandata ni Rizal sa mapayapang pakikipaglaban. Ipinagbawal ito ng mga pari at ng gobyernong Español dahil sa mapanganib nitong mensahe ng kalayaan at pagbabago.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -670,45 +888,85 @@
             
             <div class="chapter-content">
                 <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">📖 Buod ng Kabanata</h3>
-                <p>Sa kabanatang ito, naaalala ni Crisostomo Ibarra ang kanyang nakaraan kasama ang kanyang ama at ang kanyang kasintahang si Maria Clara. Bumalik siya sa Pilipinas mula sa pitong taong pag-aaral sa Europa upang dalawin ang puntod ng kanyang yumaong ama.</p>
+                <p>Sa kabanatang ito, naaalala ni Crisostomo Ibarra ang kanyang nakaraan kasama ang kanyang ama at ang kanyang kasintahang si Maria Clara. Bumalik siya sa Pilipinas mula sa pitong taong pag-aaral sa Europa upang dalawin ang puntod ng kanyang yumaong ama, Don Rafael Ibarra.</p>
                 
                 <div class="decorative-line"></div>
                 
                 <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">🔑 Mahahalagang Pangyayari</h3>
                 <ul style="color: var(--light-cream);">
-                    <li>Bumisita si Ibarra sa sementeryo upang hanapin ang libingan ng kanyang ama</li>
-                    <li>Nalaman niyang inilipat ang labi ng kanyang ama sa libingan ng mga Intsik dahil sa utos ni Padre Damaso</li>
-                    <li>Ang labi ay inilipat muli sa libingan ng mga Pilipino ngunit nilunod ng malakas na ulan</li>
-                    <li>Nakaramdam ng matinding lungkot at galit si Ibarra sa nalaman</li>
-                    <li>Ipinakita ang kawalan ng respeto ng mga pari sa mga patay at sa mga pamilya ng mga Pilipino</li>
+                    <li><strong>Pagbisita sa Sementeryo:</strong> Pumunta si Ibarra sa sementeryo ng San Diego upang hanapin ang libingan ng kanyang ama</li>
+                    <li><strong>Nakakagulat na Balita:</strong> Nalaman niyang inilipat ang labi ng kanyang ama sa libingan ng mga Intsik dahil sa utos ni Padre Damaso</li>
+                    <li><strong>Pangalawang Paglipat:</strong> Ang labi ay inilipat muli sa libingan ng mga Pilipino, ngunit nilunod ng malakas na ulan at binuksan ng mga taong hindi kilala</li>
+                    <li><strong>Pagkakaalam sa Katotohanan:</strong> Ang sepulturero (fosero) ay nagsabi kay Ibarra ng buong katotohanan tungkol sa nangyari</li>
+                    <li><strong>Reaksyon ni Ibarra:</strong> Nakaramdam siya ng matinding lungkot, galit, at pagkabigo sa sistemang relihiyoso</li>
                 </ul>
 
                 <div class="decorative-line"></div>
 
                 <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">👥 Mga Tauhan sa Kabanatang Ito</h3>
                 <ul style="color: var(--light-cream);">
-                    <li><strong>Crisostomo Ibarra</strong> - Pangunahing tauhan na naghahanap ng libingan ng ama</li>
-                    <li><strong>Fosero (Gravedigger)</strong> - Nagsabi ng katotohanan tungkol sa nangyari sa labi</li>
-                    <li><strong>Don Rafael Ibarra</strong> - Yumaong ama ni Crisostomo (binanggit lamang)</li>
-                    <li><strong>Padre Damaso</strong> - Paring nag-utos na ilipat ang labi (binanggit)</li>
+                    <li><strong>Crisostomo Ibarra</strong> - Ang pangunahing tauhan na naghahanap ng libingan ng kanyang ama; ipinakita ang kanyang pagmamahal at respeto sa yumaong ama</li>
+                    <li><strong>Sepulturero (Fosero)</strong> - Ang tagahukay ng libingan na nagsabi ng katotohanan tungkol sa nangyari sa labi ni Don Rafael; matanda at matapat</li>
+                    <li><strong>Don Rafael Ibarra</strong> - Yumaong ama ni Crisostomo; dating mayaman at respetadong tao sa San Diego (binanggit lamang sa alaala)</li>
+                    <li><strong>Padre Damaso</strong> - Ang paring nag-utos na ilipat ang labi dahil sa galit at paghihiganti (binanggit sa kuwento ng fosero)</li>
                 </ul>
+
+                <div class="decorative-line"></div>
+
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">💬 Mahalagang Diyalogo</h3>
+                <div class="info-box" style="background: rgba(255,255,255,0.1); border-color: var(--accent-gold);">
+                    <p style="color: var(--light-cream); font-style: italic;">"Inilagay ko po sa libingan ng mga Intsik ang bangkay, pero kinuha rin po ng kura at ipinatapon sa lawa."</p>
+                    <p style="color: var(--accent-gold); margin-top: 0.5rem;">- Sepulturero kay Ibarra</p>
+                </div>
 
                 <div class="decorative-line"></div>
 
                 <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">💡 Mga Aral at Mensahe</h3>
                 <ul style="color: var(--light-cream);">
-                    <li><strong>Ang Abuso ng Kapangyarihan</strong> - Ipinakita kung paano ginamit ng mga pari ang kanilang impluwensya para sa personal na paghihiganti</li>
-                    <li><strong>Kawalan ng Katarungan</strong> - Kahit sa kamatayan, walang katarungan para sa mga Pilipino</li>
-                    <li><strong>Kahalagahan ng Dignidad</strong> - Dapat respetuhin ang mga patay at ang kanilang mga pamilya</li>
-                    <li><strong>Paglaban sa Kasamaan</strong> - Ang simula ng paggising ni Ibarra sa katotohanan ng lipunan</li>
+                    <li><strong>Ang Abuso ng Kapangyarihan ng Simbahan:</strong> Ipinakita kung paano ginamit ng mga pari ang kanilang impluwensya para sa personal na paghihiganti at kontrol sa mga tao</li>
+                    <li><strong>Walang Katarungan Kahit sa Kamatayan:</strong> Kahit ang mga patay ay hindi ligtas sa pang-aabuso at kawalan ng respeto mula sa mga may kapangyarihan</li>
+                    <li><strong>Kahalagahan ng Dignidad:</strong> Ang pagkakawatak-watak sa labi ni Don Rafael ay simbolo ng pagkawasak ng dignidad ng mga Pilipino</li>
+                    <li><strong>Pagsisimula ng Paggising:</strong> Ito ang simula ng pagbabago sa pag-iisip ni Ibarra - mula sa idealistang naniniwala sa sistema hanggang sa taong nakakita ng katotohanan</li>
+                    <li><strong>Ang Lakas ng Katotohanan:</strong> Kahit masakit, mas mahalaga ang malaman ang totoo kaysa mabuhay sa kasinungalingan</li>
                 </ul>
 
                 <div class="decorative-line"></div>
 
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">🎭 Simbolismo at Interpretasyon</h3>
+                <div class="info-box" style="background: rgba(255,255,255,0.1); border-color: var(--accent-gold);">
+                    <ul style="color: var(--light-cream);">
+                        <li><strong>Ang Sementeryo</strong> - Sumasalamin sa kalagayan ng Pilipinas: patay, nakalimutan, at walang pag-asa</li>
+                        <li><strong>Ang Ulan</strong> - Mga luha ng langit para sa karahasan at kawalang-katarungan</li>
+                        <li><strong>Ang Labi ni Don Rafael</strong> - Kinakatawan ang dignidad ng bansang winasak ng mga mananakop</li>
+                        <li><strong>Ang Paghahanap ni Ibarra</strong> - Simbolo ng paghahanap ng bayan para sa katarungan at kalayaan</li>
+                    </ul>
+                </div>
+
+                <div class="decorative-line"></div>
+
                 <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">📌 Kahalagahan sa Buong Nobela</h3>
-                <p>Ang Kabanata 8 ay napakahalaga sapagkat ito ang <span class="highlight-text">simula ng tunggalian</span> sa pagitan ni Ibarra at ni Padre Damaso. Ang paghahanap ni Ibarra sa libingan ng kanyang ama ay simbolo ng kanyang paghahanap sa katarungan at katotohanan. Ito rin ang nagpasimula sa kanyang paggising sa realidad ng pang-aabuso ng mga Español sa Pilipinas.</p>
+                <p>Ang Kabanata 8 ay napakahalaga sapagkat ito ang <span class="highlight-text">simula ng tunggalian</span> sa pagitan ni Ibarra at ni Padre Damaso. Ang paghahanap ni Ibarra sa libingan ng kanyang ama ay simbolo ng kanyang paghahanap sa katarungan at katotohanan.</p>
                 
-                <p style="margin-top: 1rem;">Ang kabanatang ito ay <span class="highlight-text">nakakaantig ng damdamin</span> at nagpapakita ng malalim na pagmamahal ni Ibarra sa kanyang ama, pati na rin ang kanyang determinasyon na labanan ang injustice sa kanilang lipunan.</p>
+                <p style="margin-top: 1rem;">Dito nagsimula ang <span class="highlight-text">transformasyon ni Ibarra</span> - mula sa isang optimistiko at mapagpatawad na binata hanggang sa isang taong handang lumaban para sa tama. Ang kabanatang ito ay:</p>
+                
+                <ul style="color: var(--light-cream); margin-top: 1rem;">
+                    <li>Nagpapakita ng malalim na kasamaan ng sistema</li>
+                    <li>Naglalahad ng kawalan ng hustisya kahit sa kamatayan</li>
+                    <li>Nag-udyok kay Ibarra na kumilos para sa pagbabago</li>
+                    <li>Pumukaw ng emosyon at simpatya ng mga mambabasa</li>
+                    <li>Naging basehan ng mga susunod na kabanata tungkol sa tunggalian</li>
+                </ul>
+
+                <div class="decorative-line"></div>
+
+                <h3 style="color: var(--accent-gold); margin: 1.5rem 0 1rem;">🔗 Koneksyon sa Kasalukuyang Panahon</h3>
+                <p>Ang mga tema sa Kabanata 8 ay <span class="highlight-text">patuloy na relevant</span> hanggang ngayon:</p>
+                <ul style="color: var(--light-cream); margin-top: 1rem;">
+                    <li>Ang abuso ng kapangyarihan ay nangyayari pa rin sa iba't ibang anyo</li>
+                    <li>Maraming Pilipino ang patuloy na naghahanap ng katarungan</li>
+                    <li>Ang kahalagahan ng pagtayo para sa tama kahit may hadlang</li>
+                    <li>Ang pangangailangan na ipagtanggol ang dignidad ng lahat</li>
+                </ul>
             </div>
 
             <div style="text-align: center; margin-top: 2rem;">
@@ -719,103 +977,303 @@
         <!-- Timeline Section -->
         <section id="timeline" class="fade-in">
             <h2 class="section-title">Timeline ng Buhay ni Rizal</h2>
-            <p class="section-subtitle">Mga Mahahalagang Pangyayari</p>
+            <p class="section-subtitle">Mula Kapanganakan Hanggang Kamatayan</p>
 
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="img_2390.webp" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1861</div>
                         <h3>Kapanganakan</h3>
-                        <p>Ipinanganak si José Rizal sa Calamba, Laguna noong Hunyo 19, 1861</p>
+                        <p>Ipinanganak si José Protacio Rizal Mercado y Alonso Realonda sa Calamba, Laguna noong <strong>Hunyo 19, 1861</strong> sa isang moonlit Wednesday sa pagitan ng 11PM at hatinggabi. Siya ay ang ikapitong anak ni Francisco Mercado at Teodora Alonso.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <div class="timeline-year">1872</div>
+                        <div class="timeline-image">
+    <img src="rizal.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1872-1877</div>
                         <h3>Ateneo de Manila</h3>
-                        <p>Nag-aral sa Ateneo Municipal at naging pinakamahusay na estudyante</p>
+                        <p>Nag-aral sa Ateneo Municipal de Manila at naging pinakamahusay na estudyante. Nakatanggap ng Bachelor of Arts degree <strong>with highest honors</strong> noong Marso 23, 1877 sa edad na 16. Naging emperador ng kanyang section.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="eupoa.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1877-1882</div>
                         <h3>University of Santo Tomas</h3>
-                        <p>Nag-aral ng medisina at nakaranas ng diskriminasyon</p>
+                        <p>Nag-aral ng Philosophy and Letters (1877-1878) at Medicine (1878-1882). Nakaranas ng diskriminasyon mula sa mga Dominican professors. Naging founder ng <em>Compañerismo</em>, isang secret society ng mga Filipino students.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="rizal1.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1882</div>
                         <h3>Paglalakbay sa Europa</h3>
-                        <p>Umalis patungong Spain upang ipagpatuloy ang pag-aaral</p>
+                        <p>Umalis patungong Spain noong <strong>Mayo 3, 1882</strong> sakay ng barkong Salvadora. Dumaan sa Singapore, Colombo, Aden, Suez Canal, Naples, at Marseilles. Nakarating sa Barcelona noong Hunyo 16, 1882. Layunin: ipagpatuloy ang pag-aaral at obserbahan ang kultura ng Europa.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="rizal2.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1884</div>
+                        <h3>Natapos ang Medisina</h3>
+                        <p>Nakatanggap ng degree na <strong>Licentiate in Medicine</strong> mula sa Universidad Central de Madrid noong Hunyo 1884. Nag-aral din ng painting at sculpture. Naging miyembro ng Circulo Hispano-Filipino.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="JOSERIZALBDAY3.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1886</div>
+                        <h3>Ophthalmology sa Heidelberg</h3>
+                        <p>Nag-specialization sa ophthalmology sa University of Heidelberg, Germany sa ilalim ni Dr. Otto Becker. Layunin: gamutin ang pagunlad na pagkabulag ng kanyang ina. Sumulat ng tula <em>"To the Flowers of Heidelberg"</em> noong Abril 22, 1886.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="nolimetangere.webp" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1887</div>
                         <h3>Noli Me Tangere</h3>
-                        <p>Inilathala ang Noli Me Tangere sa Berlin, Germany</p>
+                        <p>Inilathala ang <strong>Noli Me Tangere</strong> sa Berlin, Germany noong <strong>Marso 1887</strong>. Tulong ni Maximo Viola sa pagpprint. Ang nobela ay may 64 kabanata at naglalahad ng pang-aabuso ng mga Español. Ipinagbawal ng mga pari at ng gobyerno.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="pagbabalik.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1887-1888</div>
+                        <h3>Pagbabalik sa Pilipinas</h3>
+                        <p>Bumalik sa Pilipinas noong <strong>Agosto 1887</strong> at nakita ang epekto ng Noli Me Tangere. Ginamot ang kanyang ina na bulag na. Pumunta sa Calamba at nakita ang kondisyon ng kanyang pamilya. Umalis muli para sa Europa noong Pebrero 1888.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="elfeli.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1891</div>
                         <h3>El Filibusterismo</h3>
-                        <p>Inilathala ang ikalawang nobela sa Ghent, Belgium</p>
+                        <p>Inilathala ang ikalawang nobela, <strong>El Filibusterismo</strong> (The Reign of Greed) sa Ghent, Belgium noong <strong>Setyembre 1891</strong>. Itinalaga kay GomBurZa. Mas matindi at mas mapanglaw kaysa Noli. Ipinakita ang mga resulta ng kawalang-aksyon.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                         <div class="timeline-image">
+    <img src="laliga.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1892</div>
                         <h3>La Liga Filipina</h3>
-                        <p>Itinatag ang La Liga Filipina at dinaluhan sa Dapitan</p>
+                        <p>Itinatag ang <strong>La Liga Filipina</strong> noong <strong>Hulyo 3, 1892</strong> sa bahay ni Doroteo Ongjunco sa Tondo, Manila. Layunin: pagkakaisa ng mga Pilipino at mapayapang reporma. Inaresto noong Hulyo 6 at dinaluhan sa Dapitan, Zamboanga del Norte.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="exile.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1892-1896</div>
+                        <h3>Exile sa Dapitan</h3>
+                        <p>Nag-exile sa Dapitan ng 4 na taon. Nagtayo ng paaralan, clinic, at water system. Nag-farming at nag-research. Nakipag-correspond kay Blumentritt. Nakahanap ng bagong species ng hayop. Nakilala si Josephine Bracken noong 1895.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                       <div class="timeline-image">
+    <img src="pagdakip.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
+                        <div class="timeline-year">1896</div>
+                        <h3>Pagdakip at Paglilitis</h3>
+                        <p>Inaresto bilang leader ng Rebolusyong Pilipino kahit hindi siya miyembro ng Katipunan. Dinala sa Fort Santiago noong <strong>Setyembre 1896</strong>. Sinubukan ni Andres Bonifacio na iligtas siya. Nahatulan ng kamatayan noong Disyembre 1896.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+    <img src="kamatayan.jpg" alt="Description" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+</div>
                         <div class="timeline-year">1896</div>
                         <h3>Kamatayan</h3>
-                        <p>Binaril sa Bagumbayan noong Disyembre 30, 1896</p>
+                        <p>Binaril sa Luneta (Bagumbayan) noong <strong>Disyembre 30, 1896</strong> sa edad na 35. Sumulat ng <em>"Mi Ultimo Adios"</em> sa gabi bago siya binaril. Huling salita: <strong>"Consummatum est!"</strong> (Natapos na!). Naging simula ng tunay na kalayaan.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Additional Cards -->
-        <section class="fade-in">
-            <h2 class="section-title">Mga Kontribusyon ni Rizal</h2>
+        <!-- Legacy Section -->
+        <section id="legacy" class="fade-in">
+            <h2 class="section-title">Pamana ni Rizal</h2>
+            <p class="section-subtitle">Ang Walang Hanggang Impluwensya</p>
             
             <div class="grid">
                 <div class="card">
                     <h3>Sa Panitikan</h3>
-                    <p>Sumulat ng mga nobelang Noli Me Tangere at El Filibusterismo na nagpukaw sa diwa ng nasyonalismo. Ang kanyang mga tula ay puno ng pagmamahal sa bayan.</p>
+                    <p>Sumulat ng mga nobelang <em>Noli Me Tangere</em> at <em>El Filibusterismo</em> na nagpukaw sa diwa ng nasyonalismo. Ang kanyang mga tula tulad ng <em>"Mi Ultimo Adios"</em> ay patuloy na ginagalang hanggang ngayon.</p>
+                    <div class="info-box">
+                        <h4>Mga Akda:</h4>
+                        <ul>
+                            <li>2 Nobela</li>
+                            <li>25+ Tula</li>
+                            <li>Mga Essay at Sanaysay</li>
+                            <li>Mga Liham sa Europa</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <h3>Sa Medisina</h3>
-                    <p>Naging dalubhasa sa ophthalmology at gumamot sa kanyang inang bulag. Nag-ambag sa pag-unlad ng agham sa Pilipinas.</p>
+                    <h3>Sa Medisina at Agham</h3>
+                    <p>Naging dalubhasa sa ophthalmology at gumamot sa kanyang inang bulag. Nakahanap ng tatlong bagong species ng hayop na pinangalanan sa kanya. Nag-ambag sa pag-unlad ng agham sa Pilipinas.</p>
+                    <div class="info-box">
+                        <h4>Siyentipikong Kontribusyon:</h4>
+                        <ul>
+                            <li><em>Draco rizali</em> (lizard)</li>
+                            <li><em>Apogonia rizali</em> (beetle)</li>
+                            <li><em>Rhacophorus rizali</em> (frog)</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="card">
                     <h3>Sa Edukasyon</h3>
-                    <p>Nagturo sa Dapitan at nagtayo ng paaralan. Naniniwala siya na ang edukasyon ang susi sa kalayaan ng bayan.</p>
+                    <p>Nagturo sa Dapitan at nagtayo ng paaralan para sa mga batang Pilipino. Naniniwala siya na ang edukasyon ang susi sa kalayaan ng bayan. Ang kanyang mga ideya ay naging batayan ng modernong edukasyon sa Pilipinas.</p>
+                    <div class="info-box">
+                        <h4>Pampedagogikal na Pamana:</h4>
+                        <ul>
+                            <li>Praktical at hands-on learning</li>
+                            <li>Emphasis sa languages</li>
+                            <li>Science-based education</li>
+                            <li>Character development</li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Mga Parangal at Paggunita</h3>
+                <div class="grid">
+                    <div>
+                        <ul>
+                            <li><strong>Rizal Day</strong> - Disyembre 30, pambansang holiday</li>
+                            <li><strong>Rizal Park</strong> - Dating Bagumbayan, Luneta</li>
+                            <li><strong>Rizal Monument</strong> - Sa Luneta Park</li>
+                            <li><strong>RA 1425</strong> - Rizal Law, required reading sa schools</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><strong>Lungsod ng Calamba</strong> - Rizal Shrine</li>
+                            <li><strong>Fort Santiago</strong> - Rizal's prison cell museum</li>
+                            <li><strong>Dapitan City</strong> - Rizal Shrine and museums</li>
+                            <li><strong>Maraming gusali, kalye, at paaralan</strong> - Pinangalanan sa kanya</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                        <!-- YouTube Videos Section -->
+        <section id="videos" class="fade-in">
+            <h2 class="section-title">Panoorin ang mga Video</h2>
+            <p class="section-subtitle">Mas malalim na pag-unawa sa buhay at mga akda ni Rizal</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>José Rizal Documentary</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                src="https://www.youtube.com/embed/D_HJ-dwvnsw" 
+                                title="José Rizal - How One Man Inspired a Revolution" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p>Komprehensibong documentary tungkol sa buhay ni Rizal at kung paano niya na-inspire ang rebolusyon</p>
+                </div>
+
+                
+                <div class="card">
+                    <h3>Pluma: Si Rizal, ang Dakilang Manunulat</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                src="https://www.youtube.com/embed/rAq_OjZI-6k" 
+                                title="Pluma: Si Rizal" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p>GMA News TV docudrama na nag-trace sa evolution ng mga sulatin ni Rizal (narrated by Howie Severino)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Noli Me Tangere Full Movie</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                src="https://www.youtube.com/embed/bfwNmifPlB0" 
+                                title="Noli Me Tangere Full Movie" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p>Film adaptation ng Noli Me Tangere para mas maintindihan ang kwento</p>
+                </div>
+            </div>
+
+            <div class="decorative-line"></div>
+            
+            <div class="info-box" style="margin-top: 2rem; text-align: center;">
+                <h4>💡 Tip para sa Mas Malalim na Pag-aaral</h4>
+                <p>Panoorin ang mga documentary habang binabasa ang Noli Me Tangere para sa mas komprehensibong pag-unawa sa konteksto at kahalagahan ng nobela.</p>
             </div>
         </section>
     </div>
 
     <!-- Footer -->
     <footer>
+
+    <!-- Footer -->
+    <footer>
         <p>&copy; 2025 Dr. José Rizal Tribute Website</p>
         <p>Ginawa para sa pag-aaral at pagpapahalaga sa ating Pambansang Bayani</p>
-        <p style="margin-top: 1rem; font-style: italic;">"Ang kabataan ang pag-asa ng bayan"</p>
+        <p style="margin-top: 1rem; font-style: italic;">"He who does not love his own language is worse than an animal and smelly fish"</p>
+        <div class="decorative-line" style="max-width: 300px; margin: 1rem auto;"></div>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Dedicated to all Filipino students learning about our national hero</p>
+        <p>PARTIDO STATE UNIVERSITY</p>
+        <p>BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY</p>
+         <p>BSIT-3B</p>
+         <p>Lon Adlehcir Monserate</p>
+         <p>Karl Laurence Piano</p>
+         <p>Jose Greg Picaso</p>
+         <p>Jomel Pahuwayan</p>
+         <p>Charls John Cordova</p>
+
     </footer>
 
     <!-- Scroll to Top Button -->
@@ -836,7 +1294,6 @@
             const element = document.getElementById(target);
             const navMenu = document.getElementById('navMenu');
             
-            // Close mobile menu if open
             navMenu.classList.remove('active');
             
             if (element) {
@@ -865,6 +1322,20 @@
             });
         }
 
+        // Expandable Content Toggle
+        function toggleExpand(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            element.classList.toggle('active');
+            
+            if (element.classList.contains('active')) {
+                button.textContent = 'Itago ▲';
+            } else {
+                button.textContent = 'Magbasa Pa ▼';
+            }
+        }
+
         // Intersection Observer for Fade In Animation
         const observerOptions = {
             threshold: 0.1,
@@ -880,14 +1351,14 @@
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(element => {
                 observer.observe(element);
             });
 
-            // Add smooth scroll to all nav links
+            // Smooth scroll for nav links
             document.querySelectorAll('nav a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -895,9 +1366,12 @@
                     smoothScroll(targetId);
                 });
             });
+
+            // Animated counting for stats
+            animateStats();
         });
 
-        // Card hover effect enhancement
+        // Card hover effects
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-8px) scale(1.02)';
@@ -908,7 +1382,7 @@
             });
         });
 
-        // Timeline animation on scroll
+        // Timeline animation
         const timelineItems = document.querySelectorAll('.timeline-item');
         const timelineObserver = new IntersectionObserver(function(entries) {
             entries.forEach((entry, index) => {
@@ -928,11 +1402,42 @@
             timelineObserver.observe(item);
         });
 
-        // Add parallax effect to hero section
+        // Parallax effect on hero
         window.addEventListener('scroll', function() {
             const hero = document.querySelector('.hero');
             const scrollPosition = window.pageYOffset;
             hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animate stats numbers
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const target = stat.textContent.replace('+', '');
+                const isPlus = stat.textContent.includes('+');
+                let current = 0;
+                const increment = parseInt(target) / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= parseInt(target)) {
+                        stat.textContent = target + (isPlus ? '+' : '');
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current) + (isPlus ? '+' : '');
+                    }
+                }, 30);
+            });
+        }
+
+        // Add reading progress bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            // You can add a progress bar element if needed
         });
     </script>
 </body>
